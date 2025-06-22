@@ -1,0 +1,46 @@
+<div class="container">
+  <nav class="glass-nav">
+    <button class="nav-btn" (click)="home()">Home</button>
+    <button class="nav-btn" (click)="sobre()">Sobre</button>
+    <button class="nav-btn logout" (click)="sair()">Sair</button>
+  </nav>
+
+  <h1>Gerenciamento de Usuários</h1>
+
+  <div class="form-container">
+    <h2>{{ editando ? 'Editar Usuário' : 'Novo Usuário' }}</h2>
+    <form (ngSubmit)="salvarUsuario()">
+      <div class="form-group">
+        <input type="text" [(ngModel)]="usuario.nome" name="nome" placeholder="Nome" required>
+      </div>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="usuario.telefone" name="telefone" placeholder="Telefone" required>
+      </div>
+      <div class="form-group">
+        <input type="password" [(ngModel)]="usuario.senha" name="senha" placeholder="Senha" required>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn primary">{{ editando ? 'Atualizar' : 'Salvar' }}</button>
+        <button type="button" class="btn secondary" (click)="resetarFormulario()" *ngIf="editando">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <h2>Usuários Cadastrados</h2>
+    <div *ngIf="usuarios.length === 0" class="empty-message">Nenhum usuário cadastrado</div>
+    <div *ngIf="usuarios.length > 0" class="user-list">
+      <div *ngFor="let user of usuarios" class="user-card">
+        <div class="user-info">
+          <p><strong>ID:</strong> {{ user.id }}</p>
+          <p><strong>Nome:</strong> {{ user.nome }}</p>
+          <p><strong>Telefone:</strong> {{ user.telefone }}</p>
+        </div>
+        <div class="user-actions">
+          <button (click)="editarUsuario(user)" class="btn edit">Editar</button>
+          <button (click)="excluirUsuario(user.id)" class="btn delete">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div id="container">
+    <form (submit)="onSubmit()" [formGroup]="formulario" >
+        <p>Login</p>
+        <div class="input">
+            <input id="nome" formControlName="nome" placeholder="digite o seu nome">
+            @if (formulario.get('nome')?.touched && formulario.get('nome')?.invalid) {
+            <div>
+                @if (formulario.get('nome')?.errors?.['required']) {
+                <small>nome é obrigatorio</small>
+                }
+                @if (formulario.get('nome')?.errors?.['minlenght']) {
+                <small>o nome deve ter o minimo de 3 caracteres </small>
+                }
+            </div>
+            }
+        </div>
+        <div class="input">
+            <input id="email" formControlName="email" placeholder="digite o seu email">
+            @if (formulario.get('email')?.touched && formulario.get('email')?.invalid) {
+            <div>
+                @if (formulario.get('email')?.errors?.['required']) {
+                <small>email é obrigatorio</small>
+                }
+            </div>
+            }
+        </div>
+        <div class="input">
+            <input id="Idade" type="number" formControlName="idade" placeholder="digite a sua idade">
+            @if (formulario.get('idade')?.touched && formulario.get('idade')?.invalid) {
+            <div>
+                @if (formulario.get('idade')?.errors?.['required']) {
+                <small>idade é obrigatorio</small>
+                }
+            </div>
+            }
+        </div>
+        <button id="enviar" type="submit" [disabled]="formulario.invalid">Enviar</button>
+    </form>
+</div>
